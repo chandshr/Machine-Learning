@@ -1,0 +1,36 @@
+@import helper._
+
+@main("Logistic Regression") {
+
+<div class="jumbotron">
+    <h1>Features</h1>
+    <p class="lead">Features are the columns in the data except the last column which holds the output value.</p>
+</div>
+<hr>
+
+<div class="row-fluid marketing">
+    <div class="span6">
+        <h2>Steps</h2>
+        <ol>
+            <li>Click any 1 algorithm to train the uploaded data </li>
+            <li class="success">Train Data</li>
+            <li>Result</li>
+        </ol>
+    </div>
+
+    <div class="span6">
+        <h2>Input Features for Logistic Regression</h2>
+        @form(action = routes.Application.biLogisticRegression, 'enctype -> "multipart/form-data") {
+        <input class="lead" type="file" name="dataFile" required>
+        <p class="lead">eta &nbsp;<input type="text" name="eta" required placeholder="e.g. 0.5"></p>
+        <p class="lead">no. of iterations &nbsp;<input type="text" name="iter" required placeholder="e.g. 1500"></p>
+        <p class="lead">Enter numerical features seperated by "," in the same order as in uploaded data &nbsp;<input type="text" name="featureArr" placeholder="e.g. 0.2,10,45,7" required></p>
+        <p class="lead">Positive Class value &nbsp;<input type="text" name="pos" required placeholder="e.g. 1"></p>
+        <p class="lead">Negative Class value &nbsp;<input type="text" name="neg" required placeholder="e.g. 0"></p>
+        <p class="lead">Enter the column number holding the output &nbsp;<input type="text" name="outputCol" required placeholder="e.g. 7"></p>
+        <input type="submit" class="btn btn-large btn-success">
+        }
+    </div>
+</div>
+<hr>
+}

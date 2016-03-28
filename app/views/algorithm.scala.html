@@ -1,0 +1,32 @@
+@import helper._
+
+@main("Algorithm") {
+<div class="jumbotron">
+    <h1>Backpropagation & Logistic Regression </h1>
+    <p>used for classification problem e.g. if a patient is suffering from cancer or not, predict age group of customers, e.t.c.</p>
+    <h1>Linear Regression</h1>
+    <p class="lead">predicts numerical value e.g. predict cost of medical treatment, no. of sales of bike e.t.c.</p>
+</div>
+<hr>
+
+<div class="row-fluid marketing">
+    <div class="span6">
+        <h2>Steps</h2>
+        <ol>
+            <li><a class="steps" href='@routes.Application.index'>Click any 1 algorithm to train the uploaded data</a></li>
+            <li>Train Data</li>
+            <li>Result</li>
+        </ol>
+    </div>
+
+    <div class="span6">
+        <h2>Click any 1 algorithm to train the uploaded data</h2>
+        <ul>
+            <li><a href='@routes.Application.backpropagation'>Backpropagation Algorithm</a></li>
+            <li><a href='@routes.Application.linearRegression'>Linear Regression Algorithm</a></li>
+            <li><a href='@routes.Application.setMultiLogistic'>Logistic Regression Algorithm</a></li>
+        </ul>
+    </div>
+</div>
+<hr>
+}

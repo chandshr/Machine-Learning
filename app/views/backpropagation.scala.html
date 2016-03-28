@@ -1,0 +1,37 @@
+@import helper._
+
+@main("Backpropagation") {
+
+<div class="jumbotron">
+    <h1>Backpropagation</h1>
+    <p class="lead">Features are the columns in the data except the last column which holds the output value.</p>
+</div>
+<hr>
+
+<div class="row-fluid marketing">
+    <div class="span6">
+        <h2>Steps</h2>
+        <ol>
+            <a class="steps" href='@routes.Application.index'><li>Click any 1 algorithm to train the uploaded data </li></a>
+            <li class="success">Train Data</li>
+            <li>Result</li>
+        </ol>
+    </div>
+
+    <div class="span6">
+        <h2>Input Features for Backpropagation</h2>
+        @form(action = routes.Application.outputBackpropagation, 'enctype -> "multipart/form-data") {
+        <input class="lead" type="file" name="dataFile" required>
+        <p class="lead">eta &nbsp;<input type="text" name="eta" required placeholder="e.g. 0.1"></p>
+        <p class="lead">no. of iterations &nbsp;<input type="text" name="iter" required placeholder="e.g. 400"></p>
+
+        <p class="lead">Enter numerical features seperated by "," in the same order as in uploaded data &nbsp;<input type="text" name="featureArr" placeholder="e.g. 5,10,10,3,7,3,8,10,2" required></p>
+        <p class="lead">Enter numerical values for classes seperated by "," must be > 0 if it has more than two classes. Class values must be in the range of values used in training data &nbsp;<input type="text" name="classArr" placeholder="e.g. 2,4" required></p>
+        <p class="lead">Enter the column number holding the output &nbsp;<input type="text" name="outputCol" required placeholder="e.g. 10"></p>
+        <input type="submit" class="btn btn-large btn-success">
+        }
+    </div>
+</div>
+<hr>
+}
+

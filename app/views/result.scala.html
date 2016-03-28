@@ -1,0 +1,38 @@
+@import helper._
+
+@main("Algorithm") {
+<div class="jumbotron">
+    <h1>Cost</h1>
+    <p class="lead">difference between actual and predicted values for the training data</p>
+    <h1>Accuracy</h1>
+    <p>calculated using test data not used for training the model</p>
+</div>
+<hr>
+
+<div class="row-fluid marketing">
+    <div class="span6">
+        <h2>Steps</h2>
+        <ol>
+            <li>Click any 1 algorithm to train the uploaded data </li>
+            <li>Train Data</li>
+            <li class="success">Result</li>
+        </ol>
+    </div>
+
+    <div class="span6">
+        <h2>Result</h2>
+        <table style='width:60%'>
+            <tr>
+                <td class="lead">Cost</td><td class="lead">@{Application.cost}</td>
+            </tr>
+            <tr>
+                <td class="lead">Accuracy</td><td class="lead">@{Application.accuracy}</td>
+            </tr>
+            <tr>
+                <td class="lead">Predicted Value</td><td class="lead">@{Application.predict}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<hr>
+}

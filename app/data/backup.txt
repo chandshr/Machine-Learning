@@ -1,0 +1,59 @@
+package linear_logistic;
+
+import java.util.ArrayList;
+
+/**
+ * Created by shrestha on 11/18/2015.
+ */
+public class MapFeature {
+    public double[][] incFeature(int n, double[][] A, double[][] B){
+        if(n<0){
+            return null;
+        }else if(n==0){
+            int row = A.length;
+            double[][] result = new double[row][1];
+            for(int i=0; i<row; i++){
+                result[i][0] = 1;
+            }
+            return result;
+        }else if(n==1){
+            int row = A.length;
+            /**
+             * create array with col 1, A, B
+             */
+            double[][] result = new double[row][3];
+            for(int i=0; i<row; i++){
+                result[i][0] = 1;
+                result[i][1] = A[i][0];
+                result[i][2] = B[i][0];
+            }
+            return result;
+        }else{
+            double[][] result = incFeature(n-1, A, B);
+            int row = result.length;
+            int col = result[0].length;
+            for(int i=0; i<row; i++){
+                ArrayList<Double> resultRowL = new ArrayList<Double>();
+                for(int j=0; j<col; j++){
+                    double multA = A[i][0]*result[i][j];
+                    double multB = B[i][0]*result[i][j];
+                    if(!resultRowL.contains(multA)){
+                        resultRowL.add(multA);
+                    }
+                    if (!resultRowL.contains(multB)) {
+                        resultRowL.add(multB);
+                    }
+                }
+                /**change arraylist to array start**/
+                int rowSize = resultRowL.size();
+                double[] resultRowArr = new double[rowSize];
+                for(int l=0; l<rowSize; l++){
+                    resultRowArr[l] = resultRowL.get(l);
+                }
+                /**change arraylist to array end**/
+                result[i] = resultRowArr;
+            }
+            return result;
+        }
+    }
+}

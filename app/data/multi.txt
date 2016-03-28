@@ -1,0 +1,121 @@
+public static Result multiLogisticRegression(){
+        Http.MultipartFormData body = request().body().asMultipartFormData();
+        Http.MultipartFormData.FilePart datafile = body.getFile("dataFile");
+
+        String trainFilename;
+        if (datafile != null) {
+            String fileName = datafile.getFilename();
+            String contentType = datafile.getContentType();
+            File file = datafile.getFile();
+            file.renameTo(new File(uploadDir, fileName));
+            trainFilename = uploadDir+"/"+fileName;
+        } else {
+            flash("error", "Missing file");
+            return ok("Please upload file home page");
+        }
+
+        DynamicForm df = play.data.Form.form().bindFromRequest();
+
+        String featureVal = df.get("featureArr");
+        String postClass = df.get("logisticClassArr");
+        String etaStr = df.get("eta");
+        String iterStr = df.get("iter");
+        String outputCol = df.get("outputCol");
+        int outputColNo = Integer.parseInt(outputCol);
+
+
+        double alpha = Double.valueOf(etaStr);
+        int iter = Integer.valueOf(iterStr);
+
+        featureVal = featureVal.replaceAll("\\s+","");
+        String[] featureArr = featureVal.split(",");
+
+        postClass = postClass.replaceAll("\\s+","");
+        String[] postClassArr = postClass.split(",");
+        int[] classArrP = new int[postClassArr.length];
+        for(int i=0; i<classArrP.length; i++){
+            classArrP[i] = Integer.parseInt(postClassArr[i]);
+        }
+
+        double[][] postX = new double[1][featureArr.length];
+        for(int i=0; i<featureArr.length; i++){
+            postX[0][i] = Double.parseDouble(featureArr[i]);
+        }
+
+        response().setContentType("text/html");
+        String output = new String();
+        output = output.concat("<h2>Logistic Regression</h2><table style='width:40%'>");
+        String filepath = trainFilename;
+        String jsonfilePath = uploadDir+"/linearInput.json";
+
+        LearningCurve learningCurve = new LearningCurve();
+        String seperator = ",";
+        learningCurve.initializeTrainTestcrossValidData(filepath, jsonfilePath, seperator, outputColNo);//initialize feature normalized train, test and cross validation data
+        double[][] xTrain =learningCurve.getxTrain();
+        double[][] yTrain = learningCurve.getyTrain();
+        double[][] xTest = learningCurve.getxTest();
+        double[][] yTest = learningCurve.getyTest();
+        double[][] xCross = learningCurve.getxCross();
+        double[][] yCross = learningCurve.getyCross();
+
+        Matrix matrix = new Matrix();
+        FeatureNormalize featureNormalize = learningCurve.getTrainfeatureNormalize();
+        xTrain = featureNormalize.getFeatureNormalize(xTrain);
+        xTest = featureNormalize.getFeatureNormalize(xTest);
+        xCross = featureNormalize.getFeatureNormalize(xCross);
+
+        yTrain = matrix.changeArrVal(yTrain, classArrP);
+        System.out.println(Arrays.deepToString(yTrain));
+        yTest = matrix.changeArrVal(yTest, classArrP);
+        yCross = matrix.changeArrVal(yCross, classArrP);
+
+
+        final double[][] initalTheta = new double[xTrain[0].length][1];
+//        double alpha = 0.1; //for bike data get the cost for classes nearly same and then we will have high accuracy
+        LogisticCost logisticCost = new LogisticCost();
+        double initialCost = logisticCost.getCost(xTrain, yTrain, initalTheta);
+        double[][] initialGrad = logisticCost.getGrad();
+        /*** Initial Cost End ***/
+
+        /***********iterations to find the optimum theta(gradient Descent) start**********/
+//        int iter = 400; //60% accuracy and alpha 0.001
+
+        LogisticGradientDescent gradientDescent = new LogisticGradientDescent();
+        double[][] gradTheta;
+        LogisticPredict logisticPredict = new LogisticPredict();
+        double[][] pred;
+
+        String classVal = df.get("logisticClassArr");
+        classVal = classVal.replaceAll("\\s+","");
+        int[] classArr = new int[classArrP.length];
+        for(int i=0; i<classArr.length; i++){
+            classArr[i] = i+1;
+        }
+
+        pred = new double[yTest.length][1];
+        ArrayList<double[][]> grad = new ArrayList();
+        ArrayList<double[][]> predArrL = new ArrayList();
+        ArrayList<Double> resultPred = new ArrayList();
+        for(int j=0; j<classArr.length; j++){
+            int yClass = Integer.valueOf(classArr[j]);
+            double[][] yVal = matrix.binaryClassfromMultiClass(yTrain, yClass);
+            gradTheta = gradientDescent.getGradientDescent(xTrain, yVal, iter, alpha);
+            grad.add(gradTheta);
+            double[][] predClass = logisticPredict.predictMultiClass(gradTheta, xTest, yClass);
+            predArrL.add(predClass);
+            resultPred.add(logisticPredict.predictMultiClass(gradTheta, postX, yClass)[0][0]);
+        }
+        for (int i = 0; i < yTest.length; i++) {
+            ArrayList<Double> maxArr = new ArrayList<Double>();
+            for(int j=0; j<classArr.length; j++){
+                maxArr.add(predArrL.get(j)[i][0]);
+            }
+            pred[i][0] = Collections.max(maxArr);
+        }
+        double accPercent = logisticPredict.accuracy(pred, yTest);
+        String accStr = Double.toString(accPercent);
+        output = output.concat("<tr><td>Training Accuracy</td><td>"+accStr+"%</td></tr>");
+        output = output.concat("<tr><td>Predicted Class</td><td>"+Collections.max(resultPred)+"</td></tr>");
+        output = output.concat("</table>");
+        return ok(output);
+    }
