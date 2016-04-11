@@ -1,0 +1,69 @@
+@import helper._
+
+@main("Home") {
+<div class="jumbotron">
+    <h1>Data Analysis for Prediction</h1>
+    <p>
+        This application analyses data to identify patterns in given set of instances in a data. While identifying patterns in each data instance of a data, the application is getting trained by learning relation between set of features and the output value to be determined for each data instance.
+        Training the application to learn the relation between set of features and the output value for each data instance helps to predict output for unseen data instance. The unseen data instance whose output value needs to be predicted should have similar set of features as the earlier data instances used to train the application.
+    </p>
+</div>
+<div class="jumbotron second-block">
+    <h1>How to do it?</h1>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="panel-info step1">
+                <span class="first-img"></span>
+                <h4>Choose an Algorithm</h4>
+                <p>Choose a machine learning algorithm to identify patterns and to train data.</p>
+                <a href="#" data-toggle="modal" data-target="#first">Read more</a>
+                <div class="modal fade" id="first" role="dialog">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Choose an Algorithm</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Choose a machine learning algorithm to identify patterns and to train data. This application has three machine learning algorithms: Linear Regression, Logistic Regression and Backpropagatin.
+                            Logistic And Backpropagation is used for classification problem e.g. to classify if a tumour with a given set of features is cancerous or not, classify if a student with given set of test scores will get a job or not, e.t.c.
+                            When a data has more features backpropagation has more accuracy than logistic regression. But linear regression is not used for classification problem. it is used to predict attribute value e.g. predict price of a house with given set of feature, predict tumour size, predict cost of education
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-info step2">
+                <span class="second-img"></span>
+                <h4>Train</h4>
+                <p>Train the application by submitting data file.</p>
+                <a href="#" data-toggle="modal" data-target="#second">Read more</a>
+                <div class="modal fade" id="second" role="dialog">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Train</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Training an application means submitting data, eta and number of iterations so that the application learns the relation between the attribute that needs to be determined and other set of attributes that define an entity.
+                            Determining this relation helps to predict outcome for similar set of features. To train an application user has to submit information related to data, eta, iterations, output column and class.
+                            <i>Data</i> represents a data using which the application gets trained for prediction. Attributes in each data instance must be seperated with ',' and all the attribute values must be numerical values.
+                            <i>Eta</i> represents a step value to converge towards a point that gives high accuracy. Eta should be as low as 0.1 so that we don't miss the point that gives the highest accuracy. But, if eta is too low.
+                            It takes awhile to converge to that optimum point.
+                            <i>Iterations</i> is a number of times a gradient descent algorithms needs to be executed internally. If its high it gives more accuracy but takes more computational time.
+                            <i>Features</i> is a set of values representing an entity of a given data. In both training data and while predicting output of a given entity the set of features must be seperated with ',' e.g. 5, 6, 3, 0.1, 6 might represent a tumor property of a breast cancer data.
+                            <i>Output Column</i> is a column holding the output value for each data instances used in training e.g. Column 4 of a given data might represent an attribute of a data instance which needs to be predicted.
+                            <i>Class</i> is a numerical value representing a class used to classify the data instances of a training data e.g. in a data instance representing a tumour property "2" might represent benign tumor and "4" might represent malignant tumor.
+                            Submit all these values to train the application.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-info step3">
+                <span class="third-img"></span>
+                <h4>Result</h4>
+                <p>Accuracy of the application and predicted value will be displayed in last step of this application</p>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="@routes.Application.algorithm"><input class="blue-btn pull-right" value="Get Started"></a>
+}

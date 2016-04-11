@@ -3,35 +3,32 @@
 @main("Backpropagation Result") {
 <div class="jumbotron">
     <h1>Backpropagation</h1>
-    <p class="lead">Cost is the difference between actual and predicted values in the training data</p>
-    <p class="lead">Accuracy is calculated using test data not used for training the model</p>
+    <p class="lead">Cost is the difference between actual and predicted values in the training data. Accuracy is calculated using test data not used for training the model</p>
 </div>
-<hr>
 
 <div class="row-fluid marketing">
-    <div class="span6">
+    <div class="span6 all-steps">
         <h2>Steps</h2>
         <ol>
-            <a class="steps" href='@routes.Application.index'><li>Click any 1 algorithm to train the uploaded data </li></a>
+            <a class="steps" href='@routes.Application.index'><li>Click on an algorithm to train the uploaded data </li></a>
             <li>Train Data</li>
             <li class="success">Result</li>
         </ol>
     </div>
 
-    <div class="span6">
+    <div class="span6 algo-form">
         <h2>Result</h2>
         <table style='width:60%'>
             <tr>
                 <td class="lead">Cost</td><td class="lead">@{Application.cost}</td>
             </tr>
             <tr>
-                <td class="lead">Accuracy</td><td class="lead">@{Application.accuracy}</td>
+                <td class="lead">Accuracy</td><td class="lead">@{Application.accuracy}%</td>
             </tr>
             <tr>
-                <td class="lead">Predicted Value</td><td class="lead">@{Application.predict}</td>
+                <td class="lead">Predicted Class</td><td class="lead">@{Application.predict}</td>
             </tr>
         </table>
     </div>
 </div>
-<hr>
 }

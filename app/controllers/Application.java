@@ -40,6 +40,10 @@ public class Application extends Controller {
     private static String uploadDir = Play.application().configuration().getString("myUploadDir");
 
     public static Result index() {
+        return ok(home.render());
+    }
+
+    public static Result algorithm() {
         return ok(algorithm.render());
     }
 

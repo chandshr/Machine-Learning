@@ -3,30 +3,57 @@
 @main("Linear Regression") {
 <div class="jumbotron">
     <h1>Linear Regression</h1>
-    <p class="lead">Features are the columns in the data except the last column which holds the output value.</p>
+    <p class="lead">Linear regression is not used to classify entity. It is used to predict attribute value e.g. price of a house.</p>
 </div>
-<hr>
 <div class="row-fluid marketing">
-    <div class="span6">
+    <div class="span6 all-steps">
         <h2>Steps</h2>
         <ol>
-            <a class="steps" href='@routes.Application.index'><li>Click any 1 algorithm to train the uploaded data </li></a>
+            <a class="steps" href='@routes.Application.index'><li>Click on an algorithm to train the uploaded data </li></a>
             <li class="success">Train Data</li>
             <li>Result</li>
         </ol>
     </div>
 
-    <div class="span6">
+    <div class="span6 algo-form">
         <h2>Features</h2>
         @form(action = routes.Application.outputLinearRegression, 'enctype -> "multipart/form-data") {
-        <input class="lead" type="file" name="dataFile" required>
-        <p class="lead">eta &nbsp;<input type="text" name="eta" required placeholder="e.g. 0.1"></p>
-        <p class="lead">no. of iterations &nbsp;<input type="text" name="iter" required placeholder="e.g. 400"></p>
-        <p class="lead">Enter numerical features seperated by "," in the same order as in uploaded data &nbsp;<input type="text" name="featureArr" placeholder="e.g. 5,10,10,3,7,3,8,10,2" required></p>
-        <p class="lead">Enter the column number holding the output &nbsp;<input type="text" name="outputCol" required placeholder="e.g. 10"></p>
-        <input class="btn btn-large btn-success" type="submit">
+        <div class="form-group row">
+            <label for="data" class="col-sm-2 form-control-label">Data</label>
+            <div class="col-sm-10">
+                <input data-toggle="tooltip" data-placement="top" title="Training data attributes should be seperated with ','" id="data" class="form-control-file"  type="file" name="dataFile" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="eta" class="col-sm-2 form-control-label">Eta</label>
+            <div class="col-sm-10">
+                <input data-toggle="tooltip" data-placement="top" title="Small eta like 0.1 gives high accuracy" id="eta" name="eta" class="form-control" required placeholder="e.g. 0.1">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="iter" class="col-sm-2 form-control-label">Iterations</label>
+            <div class="col-sm-10">
+                <input data-toggle="tooltip" data-placement="top" title="Large no. of iterations gives high accuracy" id="iter" class="form-control" name="iter" required placeholder="e.g. 400" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="feature" class="col-sm-2 form-control-label">Features</label>
+            <div class="col-sm-10">
+                <input data-toggle="tooltip" data-placement="top" title="Features need to be seperated by ','" id="feature" type="text" class="form-control" name="featureArr" placeholder="e.g. 5,10,10,3,7,3,8,10,2" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="col" class="col-sm-2 form-control-label  form-inline">Output Column</label>
+            <div class="col-sm-10">
+                <input data-toggle="tooltip" data-placement="top" title="Column no. representing the attribute that needs to be predicted" id="col"  class="form-control" name="outputCol" required placeholder="e.g. 10">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success btn-large">Submit</button>
+            </div>
+        </div>
         }
     </div>
 </div>
-<hr>
 }

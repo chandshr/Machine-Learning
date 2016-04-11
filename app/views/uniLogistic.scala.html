@@ -4,21 +4,20 @@
 
 <div class="jumbotron">
     <h1>Features</h1>
-    <p class="lead">Features are the columns in the data except the last column which holds the output value.</p>
+    <p class="lead">Column represent the features in the data except the last column which holds the output value.</p>
 </div>
-<hr>
 
 <div class="row-fluid marketing">
-    <div class="span6">
+    <div class="span6 all-steps">
         <h2>Steps</h2>
         <ol>
-            <li>Click any 1 algorithm to train the uploaded data </li>
+            <li>Click on an algorithm to train the uploaded data </li>
             <li class="success">Train Data</li>
             <li>Result</li>
         </ol>
     </div>
 
-    <div class="span6">
+    <div class="span6 algo-form">
         <h2>Input Features for Logistic Regression</h2>
         @form(action = routes.Application.biLogisticRegression, 'enctype -> "multipart/form-data") {
         <input class="lead" type="file" name="dataFile" required>
@@ -32,5 +31,4 @@
         }
     </div>
 </div>
-<hr>
 }

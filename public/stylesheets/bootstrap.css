@@ -264,7 +264,7 @@ a:focus {
 }
 
 .row {
-  margin-left: -20px;
+ /* margin-left: -20px; */
   *zoom: 1;
 }
 
@@ -6164,4 +6164,18 @@ a.badge:focus {
 
 .affix {
   position: fixed;
+}
+
+.col-sm-2 {
+    width: 30%;
+    font-size: 20px;
+}
+
+.col-sm-10 {
+    width: 70%;
+    font-size: 20px;
+}
+
+.col-sm-offset-2 {
+    margin-left: 30%;
 }
