@@ -1,4 +1,10 @@
-This is your new Play application
-=====================================
-
-This file will be packaged with your application, when using `play dist`.
+The model of machine learning algorithm is managed with Java and frontend is created using Play Framework(Java) and Bootstrap(Design).
+Machine-Learning/app contains controllers, data and views.
+Machine-Learning/app/controllers folder contains all the classes used to build the machine learning model. It contains all the files used for prediction. 
+Machine-Learning/app/data folder contains test data files that can be used to test the prediction accuracy of the application. 
+Machine-Learning/app/view folder contains source files that are used to display the web application in the browser. 
+Machine-Learning/conf contains configuration files used by play framework to display application in browser. 
+To view this application in a computer, the computer must have JDK and Play Framework(Java). 
+After JDK and Play Framework(Java) is setuped user should submit command "play run" at the location where the project is located 
+e.g. E:\project\Machine-Learning>play run
+After everything goes fine the application be viewed in browser at address localhost:8080. 
